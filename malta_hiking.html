@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马耳他安静徒步路线地图</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .trail-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .trail-info h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .info-box h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .easy {
+            background: #27ae60;
+            color: white;
+        }
+
+        .moderate {
+            background: #f39c12;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            #map {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>马耳他安静徒步路线地图</h1>
+        
+        <div id="map"></div>
+
+        <div class="trail-info">
+            <h2>推荐路线</h2>
+            
+            <div class="info-box">
+                <h3>1. 马萨尔福恩至圣托马斯湾沿海小径</h3>
+                <span class="difficulty easy">难度：简单</span>
+                <p>这是一条宁静的沿海步道，全长约4.5公里（往返）。沿途可以欣赏到清澈的海水和宁静的海湾景色，适合冥想和放松。</p>
+                <p>建议时长：2小时</p>
+                <p>最佳季节：春季和秋季</p>
+            </div>
+
+            <div class="info-box">
+                <h3>2. 米贾尔至拉斯卡里斯悬崖徒步</h3>
+                <span class="difficulty moderate">难度：中等</span>
+                <p>沿着悬崖边缘的安静步道，全长约4公里（往返）。可以俯瞰地中海，远离城市喧嚣。</p>
+                <p>建议时长：2-2.5小时</p>
+                <p>最佳季节：春季和秋季</p>
+            </div>
+
+            <div class="info-box">
+                <h3>3. 哈萨基至加尔拉普自然步道</h3>
+                <span class="difficulty easy">难度：简单</span>
+                <p>这是一条穿越历史遗迹和自然风光的步道，全长约3.5公里（往返）。沿途有古老的哈萨基神庙遗址，环境幽静。</p>
+                <p>建议时长：1.5小时</p>
+                <p>最佳季节：全年</p>
+            </div>
+        </div>
+
+        <div class="trail-info">
+            <h2>安全提示</h2>
+            <ul>
+                <li>徒步前请确保天气适宜，避免在极端天气下徒步</li>
+                <li>携带足够的水和零食</li>
+                <li>穿着合适的徒步鞋和防晒衣物</li>
+                <li>建议结伴同行</li>
+                <li>提前告知家人徒步路线和预计返回时间</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([35.9375, 14.3754], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 路线1：马萨尔福恩至圣托马斯湾
+        var route1 = [
+            [35.8310, 14.5480], // 马萨尔福恩村南部
+            [35.8490, 14.5660]  // 圣托马斯湾
+        ];
+        L.polyline(route1, {color: 'blue', weight: 3}).addTo(map)
+            .bindPopup('马萨尔福恩至圣托马斯湾沿海小径 (约4.5公里往返)');
+
+        // 路线2：米贾尔至拉斯卡里斯
+        var route2 = [
+            [35.9180, 14.3650], // 米贾尔村附近
+            [35.9100, 14.3500]  // 拉斯卡里斯瞭望点
+        ];
+        L.polyline(route2, {color: 'green', weight: 3}).addTo(map)
+            .bindPopup('米贾尔至拉斯卡里斯悬崖徒步 (约4公里往返)');
+
+        // 路线3：哈萨基至加尔拉普
+        var route3 = [
+            [35.8270, 14.4420], // 哈萨基神庙附近
+            [35.8250, 14.4260]  // 加尔拉普海湾
+        ];
+        L.polyline(route3, {color: 'red', weight: 3}).addTo(map)
+            .bindPopup('哈萨基至加尔拉普自然步道 (约3.5公里往返)');
+
+        // 添加起点和终点标记
+        L.marker([35.8310, 14.5480]).bindPopup('马萨尔福恩村南部起点').addTo(map);
+        L.marker([35.8490, 14.5660]).bindPopup('圣托马斯湾终点').addTo(map);
+        L.marker([35.9180, 14.3650]).bindPopup('米贾尔村附近起点').addTo(map);
+        L.marker([35.9100, 14.3500]).bindPopup('拉斯卡里斯瞭望点终点').addTo(map);
+        L.marker([35.8270, 14.4420]).bindPopup('哈萨基神庙附近起点').addTo(map);
+        L.marker([35.8250, 14.4260]).bindPopup('加尔拉普海湾终点').addTo(map);
+
+        var group = new L.featureGroup([
+            L.polyline(route1),
+            L.polyline(route2),
+            L.polyline(route3)
+        ]);
+        map.fitBounds(group.getBounds());
+    </script>
+</body>
+</html> 
